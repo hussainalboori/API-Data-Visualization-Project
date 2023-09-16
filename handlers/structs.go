@@ -34,6 +34,12 @@ type Place struct {
 	}
 }
 
+type SearchInput struct {
+	Group   []Artist
+	People  []string
+	Created []int
+	Places  []string
+}
 
 func Contains(s []string, str string) bool {
 	for _, v := range s {
@@ -45,12 +51,12 @@ func Contains(s []string, str string) bool {
 	return false
 }
 
-// func ContainsInt(arr []int, num int) bool {
-// 	for _, v := range arr {
-// 		if v == num {
-// 			return true
-// 		}
-// 	}
+func ContainsInt(arr []int, num int) bool {
+	for _, v := range arr {
+		if v == num {
+			return true
+		}
+	}
 
-// 	return false
-// }
+	return false
+}
