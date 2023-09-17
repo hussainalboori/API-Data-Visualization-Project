@@ -9,6 +9,7 @@ import (
 func main() {
 	port := ":8080"
 	http.HandleFunc("/", handlers.Index)
+	http.HandleFunc("/artist/", handlers.Artists)
 	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("./template/static"))))
 	log.Printf("Connect to our website throught http://localhost%s", port)
 	http.ListenAndServe(port, nil)

@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"reflect"
+	"strconv"
 	"strings"
 )
 
@@ -70,7 +71,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 	}
 
-	// adding cities without duplicates to res_locations - array
 	for _, v := range new_locations {
 		if !Contains(res_locations, v) {
 			res_locations = append(res_locations, v)
@@ -90,6 +90,56 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
+
+func Artists(w http.ResponseWriter, r *http.Request) {
+	link := r.URL.Path
+	linkList := strings.Split(link, "/")
+	id, err := strconv.Atoi(linkList[len(linkList)-1])
+	if len(linkList) > 3 || linkList[1] != "artist" || (id <= 0 || id > 52) {
+		Errorshandler(w, http.StatusNotFound)
+		return
+	}
+	if r.Method != http.MethodGet {
+		Errorshandler(w, http.StatusMethodNotAllowed)
+		return
+	}
+	template, err := template.ParseFiles("./template/artist.html")
+	if err != nil {
+		log.Println(err.Error())
+		Errorshandler(w, http.StatusInternalServerError)
+		return
+	}
+	mainPage, err3 := JsonArtists()
+	if err3 != nil {
+		Errorshandler(w, http.StatusInternalServerError)
+		return
+	}
+	concerts, err4 := JsonConcerts(strconv.Itoa(id))
+	if err4 != nil {
+		Errorshandler(w, http.StatusInternalServerError)
+		return
+	}
+	MapData := map[string][]string{}
+
+	for key, value := range concerts.DatesLocations {
+		key = strings.ReplaceAll(key, "_", " ")
+		key = strings.ReplaceAll(key, "-", ", ")
+		MapData[key] = value
+	}
+	res := AllData{
+		Main:     mainPage[id-1],
+		Concerts: MapData,
+	}
+	err = template.Execute(w, res)
+
+	if err != nil {
+		log.Println(err.Error())
+		Errorshandler(w, http.StatusInternalServerError)
+		return
+	}
+}
+
+
 
 func Errorshandler(w http.ResponseWriter, status int) {
 	template, err := template.ParseFiles("./template/error.html")
