@@ -1,0 +1,35 @@
+/* index.css */
+.container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #searchInput {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #searchResults {
+    margin-top: 20px;
+  }
+  
+  .artist {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  .artist a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .artist img {
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  

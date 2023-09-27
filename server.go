@@ -7,10 +7,10 @@ import (
 )
 
 func main() {
-	port := ":8080"
+	port := ":4000"
 	http.HandleFunc("/", handlers.Index)
 	http.HandleFunc("/artist/", handlers.Artists)
-	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("./template/static"))))
+	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("./static"))))
 	log.Printf("Connect to our website throught http://localhost%s", port)
 	http.ListenAndServe(port, nil)
 }

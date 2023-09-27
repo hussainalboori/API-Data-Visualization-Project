@@ -1,5 +1,6 @@
 <head>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="/static/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <div class="container">
@@ -15,7 +16,7 @@
         {{ range .Group }}
         var artistName = "{{ .Name }}".toLowerCase();
         if (artistName.includes(searchText)) {
-          resultsHtml += '<div class="artist"><a href="http://localhost:8080/artist/{{ .Id }}"><img src="{{ .Image }}" width="150px"><a href="http://localhost:8080/artist/{{ .Id }}">{{ .Name }}</a></a></div>';
+          resultsHtml += '<div class="artist"><a href="/artist/{{ .Id }}"><img src="{{ .Image }}" width="150px"><br>{{ .Name }}</a></div>';
         }
         {{ end }}
         $("#searchResults").html(resultsHtml);

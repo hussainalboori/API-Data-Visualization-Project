@@ -1,0 +1,87 @@
+/* Reset some default browser styles */
+body, h1, p, ul, li, table {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Set a background color for the body */
+  body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Style the container */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style the header */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style the bio section */
+  .bio {
+    margin-bottom: 20px;
+  }
+  
+  /* Style the member list */
+  .members {
+    list-style-type: none;
+  }
+  
+  .member {
+    margin-bottom: 5px;
+  }
+  
+  /* Style the logo image */
+  .logo img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Style the concerts table */
+  .tab {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Style the concert date */
+  .date {
+    font-weight: bold;
+  }
+  
+  /* Style the home link */
+  .home {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background-image: url('path-to-your-home-icon.png');
+    background-size: cover;
+  }
+  
+  /* Style the Concerts section */
+  .Concerts {
+    margin-top: 20px;
+  }
+  
+  /* Add more styles as needed */
+  
