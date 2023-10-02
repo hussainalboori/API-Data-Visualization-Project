@@ -12,6 +12,7 @@ import (
 var arr_cities [][]string
 
 func Index(w http.ResponseWriter, r *http.Request) {
+	searchInput := strings.TrimSpace(r.FormValue("searchInput"))
 	if r.URL.Path != "/" {
 		Errorshandler(w, http.StatusNotFound)
 		return
@@ -32,9 +33,24 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		Errorshandler(w, http.StatusInternalServerError)
 		return
 	}
+	var filteredBand []Artist // Replace YourBandType with the actual type of your band objects
+
+	for _, v := range band {
+		if strings.Contains(strings.ToLower(v.Name), strings.ToLower(searchInput)) || strings.Contains(strings.ToLower(v.FirstAlbum), strings.ToLower(searchInput)) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), strings.ToLower(searchInput)) {
+			filteredBand = append(filteredBand, v)
+		} else {
+			for _, member := range v.Members {
+				if strings.Contains(strings.ToLower(member), strings.ToLower(searchInput)) {
+					filteredBand = append(filteredBand, v)
+					break
+				}
+			}
+		}
+	}
+
 	var members []string
 	var created []int
-	for _, v := range band {
+	for _, v := range filteredBand {
 		for _, vv := range v.Members {
 			if !Contains(members, v.Name) {
 				members = append(members, vv)
@@ -78,10 +94,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := SearchInput{
-		Group:   band,
-		People:  members,
-		Created: created,
-		Places:  res_locations,
+		Group:       band,
+		People:      members,
+		Created:     created,
+		Places:      res_locations,
+		SearchInput: searchInput,
 	}
 	err = template.Execute(w, res)
 	if err != nil {
@@ -138,8 +155,6 @@ func Artists(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
-
 
 func Errorshandler(w http.ResponseWriter, status int) {
 	template, err := template.ParseFiles("./template/error.html")

@@ -1,7 +1,7 @@
 package handlers
 
 type Errors struct {
-	Status int
+	Status  int
 	Message string
 }
 
@@ -35,10 +35,11 @@ type Place struct {
 }
 
 type SearchInput struct {
-	Group   []Artist
-	People  []string
-	Created []int
-	Places  []string
+	Group       []Artist
+	People      []string
+	Created     []int
+	Places      []string
+	SearchInput string
 }
 
 func Contains(s []string, str string) bool {
