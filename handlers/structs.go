@@ -34,12 +34,29 @@ type Place struct {
 	}
 }
 
+type Location struct {
+	Id        int
+	Locations []string
+	Dates     string
+}
+
 type SearchInput struct {
-	Group       []Artist
-	People      []string
-	Created     []int
-	Places      []string
-	SearchInput string
+	Group           []Artist
+	People          []string
+	Created         []int
+	Places          []string
+	SearchInput     string
+	CareerStartDate int
+	FirstAlbumDate  int
+	Member1         bool
+	Member2         bool
+	Member3         bool
+	Member4         bool
+	Member5         bool
+	Member6         bool
+	Member7         bool
+	Member8         bool
+	Location        string
 }
 
 func Contains(s []string, str string) bool {

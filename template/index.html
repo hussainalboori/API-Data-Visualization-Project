@@ -8,6 +8,57 @@
     <div class="container">
       <input type="text" id="searchInput" name="searchInput" placeholder="Search artists..." value="{{ .SearchInput }}">
       <div>
+        Career Start Date
+      </div>
+      <div>
+
+        <label>1900</label><input type="range" id="careerStartDate" name="careerStartDate" min="1900" max="2030"
+          value="{{ .CareerStartDate }}"><label>2030</label>
+      </div>
+      <div>
+        First Album Date
+      </div>
+      <div>
+        <label>1900</label><input type="range" id="firstAlbumDate" name="firstAlbumDate" min="1900" max="2030"
+          value="{{ .FirstAlbumDate }}"><label>2030</label>
+      </div>
+      <div>
+        Select Location
+      </div>
+      <select id="location" name="location">
+        <option value="">location</option>
+       {{ range .Places }}
+        <option value="{{ . }}" {{if eq . $.Location}} selected {{ end }}>{{ . }}</option>
+        {{ end }}
+      </select>
+      <div>
+        Number Of member
+      </div>
+      <div>
+        <label>1</label><input type="checkbox" id="1member" name="1member" {{if .Member1}} checked {{ end }}>
+      </div>
+      <div>
+        <label>2</label><input type="checkbox" id="2member" name="2member" {{if .Member2}} checked {{ end }}>
+      </div>
+      <div>
+        <label>3</label><input type="checkbox" id="3member" name="3member" {{if .Member3}} checked {{ end }}>
+      </div>
+      <div>
+        <label>4</label><input type="checkbox" id="4member" name="4member" {{if .Member4}} checked {{ end }}>
+      </div>
+      <div>
+        <label>5</label><input type="checkbox" id="5member" name="5member" {{if .Member5}} checked {{ end }}>
+      </div>
+      <div>
+        <label>6</label><input type="checkbox" id="6member" name="6member" {{if .Member6}} checked {{ end }}>
+      </div>
+      <div>
+        <label>7</label><input type="checkbox" id="6member" name="6member" {{if .Member7}} checked {{ end }}>
+      </div>
+      <div>
+        <label>8</label><input type="checkbox" id="8member" name="8member" {{if .Member8}} checked {{ end }}>
+      </div>
+      <div>
         <button>search</button>
       </div>
       <div id="searchResults">

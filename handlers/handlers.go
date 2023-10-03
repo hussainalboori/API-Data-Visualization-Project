@@ -13,6 +13,19 @@ var arr_cities [][]string
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	searchInput := strings.TrimSpace(r.FormValue("searchInput"))
+	searchInputLower := strings.ToLower(searchInput)
+	careerStartDate, _ := strconv.Atoi(r.FormValue("careerStartDate"))
+	firstAlbumDate, _ := strconv.Atoi(r.FormValue("firstAlbumDate"))
+	member1 := strings.TrimSpace(r.FormValue("1member")) == "on"
+	member2 := strings.TrimSpace(r.FormValue("2member")) == "on"
+	member3 := strings.TrimSpace(r.FormValue("3member")) == "on"
+	member4 := strings.TrimSpace(r.FormValue("4member")) == "on"
+	member5 := strings.TrimSpace(r.FormValue("5member")) == "on"
+	member6 := strings.TrimSpace(r.FormValue("6member")) == "on"
+	member7 := strings.TrimSpace(r.FormValue("7member")) == "on"
+	member8 := strings.TrimSpace(r.FormValue("8member")) == "on"
+	location := r.FormValue("location")
+
 	if r.URL.Path != "/" {
 		Errorshandler(w, http.StatusNotFound)
 		return
@@ -33,24 +46,10 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		Errorshandler(w, http.StatusInternalServerError)
 		return
 	}
-	var filteredBand []Artist // Replace YourBandType with the actual type of your band objects
-
-	for _, v := range band {
-		if strings.Contains(strings.ToLower(v.Name), strings.ToLower(searchInput)) || strings.Contains(strings.ToLower(v.FirstAlbum), strings.ToLower(searchInput)) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), strings.ToLower(searchInput)) {
-			filteredBand = append(filteredBand, v)
-		} else {
-			for _, member := range v.Members {
-				if strings.Contains(strings.ToLower(member), strings.ToLower(searchInput)) {
-					filteredBand = append(filteredBand, v)
-					break
-				}
-			}
-		}
-	}
 
 	var members []string
 	var created []int
-	for _, v := range filteredBand {
+	for _, v := range band {
 		for _, vv := range v.Members {
 			if !Contains(members, v.Name) {
 				members = append(members, vv)
@@ -93,12 +92,51 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	var filteredBand []Artist
+	for _, v := range band {
+		a, _ := JsonLocation(v.Locations)
+		searchLocation := false
+		filterLocation := false
+		for _, vv := range a.Locations {
+			vv2 := strings.ReplaceAll(vv, "_", " ")
+			vv2 = strings.ReplaceAll(vv2, "-", ", ")
+			if strings.Contains(strings.ToLower(vv2), strings.ToLower(searchInput)) {
+				searchLocation = true
+			}
+			if strings.ToLower(location) == vv2 || location == "" {
+				filterLocation = true
+			}
+		}
+		firstAlbum, _ := strconv.Atoi(strings.Split(v.FirstAlbum, "-")[2])
+		if filterLocation && careerStartDate <= v.CreationDate && firstAlbumDate <= firstAlbum && ((!member1 && !member2 && !member3 && !member4 && !member5 && !member6 && !member7 && !member8) || (member1 && len(v.Members) == 1) || (member2 && len(v.Members) == 2) || (member3 && len(v.Members) == 3) || (member4 && len(v.Members) == 4) || (member5 && len(v.Members) == 5) || (member6 && len(v.Members) == 6) || (member7 && len(v.Members) == 7) || (member8 && len(v.Members) == 8)) {
+			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || strings.Contains(strings.ToLower(v.FirstAlbum), searchInputLower) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
+				filteredBand = append(filteredBand, v)
+			} else {
+				for _, member := range v.Members {
+					if strings.Contains(strings.ToLower(member), searchInputLower) {
+						filteredBand = append(filteredBand, v)
+					}
+				}
+			}
+		}
+	}
 	res := SearchInput{
-		Group:       band,
-		People:      members,
-		Created:     created,
-		Places:      res_locations,
-		SearchInput: searchInput,
+		Group:           filteredBand,
+		People:          members,
+		Created:         created,
+		Places:          res_locations,
+		SearchInput:     searchInput,
+		CareerStartDate: careerStartDate,
+		FirstAlbumDate:  firstAlbumDate,
+		Member1:         member1,
+		Member2:         member2,
+		Member3:         member3,
+		Member4:         member4,
+		Member5:         member5,
+		Member6:         member6,
+		Member7:         member7,
+		Member8:         member8,
+		Location:        location,
 	}
 	err = template.Execute(w, res)
 	if err != nil {

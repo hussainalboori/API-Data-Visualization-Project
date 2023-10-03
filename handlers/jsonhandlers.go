@@ -50,3 +50,18 @@ func JsonLocations() (Place, error) {
 	}
 	return location, nil
 }
+
+func JsonLocation(url string) (Location, error) {
+	temp, err := http.Get(url)
+	if err != nil {
+		return Location{}, err
+	}
+	defer temp.Body.Close()
+	var location Location
+	byteResult, _ := io.ReadAll(temp.Body)
+	err2 := json.Unmarshal(byteResult, &location)
+	if err2 != nil {
+		return Location{}, err
+	}
+	return location, nil
+}
