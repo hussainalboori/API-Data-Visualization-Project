@@ -74,9 +74,15 @@
       </div>
       <div id="searchResults">
         {{ range .Group }}
-        <div class="artist"><a href="/artist/{{ .Id }}"><img src="{{ .Image }}" width="150px"><br>{{ .Name }}</a></div>
+        <div class="artist">
+          <a href="/artist/{{ .Id }}">
+            <img src="{{ .Image }}" width="150px"><br>
+            <span class="artist-name">{{ .Name }}</span>
+          </a>
+        </div>
         {{ end }}
       </div>
+      
     </div>
   </form>
 </body>

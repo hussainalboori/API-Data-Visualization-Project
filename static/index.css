@@ -83,8 +83,16 @@
   }
   
   .artist img {
-    max-width: 100%;
+    max-width: 150px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .artist-name {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; /* Adjust the max width as needed */
   }
   
