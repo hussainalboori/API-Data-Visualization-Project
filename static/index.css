@@ -135,3 +135,67 @@
   font-size: xx-large;
   margin-top: -110;
 }
+
+/* Apply basic styles to the filter containers */
+.FilterCareerStartDate,
+.FilterFirstAlbumDate,
+.FilterLocation,
+.FilterNumberOfMember,
+.SearchButton {
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: top;
+}
+
+/* Style the header in each filter container */
+.FilterCareerStartDate > div,
+.FilterFirstAlbumDate > div,
+.FilterLocation > div,
+.FilterNumberOfMember > div {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Style the range input and its labels */
+input[type="range"] {
+    width: 100%;
+    margin: 5px 0;
+}
+
+label[for^="from"],
+label[for^="to"] {
+    display: inline-block;
+    width: 40px;
+    text-align: center;
+}
+
+/* Style the text inputs */
+input[type="text"] {
+    width: 60px;
+}
+
+/* Style the select element */
+select {
+    width: 100%;
+}
+
+/* Style the checkboxes and their labels */
+.FilterNumberOfMember div {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Style the search button */
+button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
