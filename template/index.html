@@ -27,66 +27,120 @@
         <input type="text" class="input-search" id="searchInput" name="searchInput" placeholder="Search artists..."
           value="{{ .SearchInput }}">
       </div>
-      <div>
-        Career Start Date
+      
+      <div class="FilterCareerStartDate">
+        <div>
+          Career Start Date
+        </div>
+       <div>
+          <label for="fromCareerStartDate">From</label>
+          <input type="range" id="fromCareerStartDate" name="fromCareerStartDate" min="1900" max="2030" value="{{ .FromCareerStartDate }}">
+          <input type="text" id="fromCareerStartDateText" name="fromCareerStartDateText">
+          <br>
+          <label for="toCareerStartDate">To</label>
+          <input type="range" id="toCareerStartDate" name="toCareerStartDate" min="1900" max="2030" value="{{ .ToCareerStartDate }}">
+          <input type="text" id="toCareerStartDateText" name="toCareerStartDateText">
+      </div>
+      </div>
+      <div class="FilterFirstAlbumDate">
+        <div>
+          First Album Date
       </div>
       <div>
-
-        <label>1900</label>
-        <input type="range" id="fromCareerStartDate" name="fromCareerStartDate" min="1900" max="2030"
-          value="{{ .FromCareerStartDate }}">
-          <input type="range" id="toCareerStartDate" name="toCareerStartDate" min="1900" max="2030"
-          value="{{ .ToCareerStartDate }}">
-        <label>2030</label>
+          <label for="fromFirstAlbumDate">From</label>
+          <input type="range" id="fromFirstAlbumDate" name="fromFirstAlbumDate" min="1900" max="2030" value="{{ .FromFirstAlbumDate }}">
+          <input type="text" id="fromFirstAlbumDateText" name="fromFirstAlbumDateText">
+          <br>
+          <label for="toFirstAlbumDate">To</label>
+          <input type="range" id="toFirstAlbumDate" name="toFirstAlbumDate" min="1900" max="2030" value="{{ .ToFirstAlbumDate }}">
+          <input type="text" id="toFirstAlbumDateText" name="toFirstAlbumDateText">
       </div>
-      <div>
-        First Album Date
       </div>
-      <div>
-        <label>1900</label>
-        <input type="range" id="fromFirstAlbumDate" name="fromFirstAlbumDate" min="1900" max="2030"
-          value="{{ .FromFirstAlbumDate }}">
-          <input type="range" id="toFirstAlbumDate" name="toFirstAlbumDate" min="1900" max="2030"
-          value="{{ .ToFirstAlbumDate }}">
-          <label>2030</label>
+    <script>
+        // Function to update the text inputs when the range sliders change
+        function updateTextInput(sliderId, inputId) {
+            const slider = document.getElementById(sliderId);
+            const input = document.getElementById(inputId);
+            input.value = slider.value;
+        }
+    
+        // Add event listeners to update text inputs when sliders change
+        document.getElementById("fromCareerStartDate").addEventListener("input", function () {
+            updateTextInput("fromCareerStartDate", "fromCareerStartDateText");
+        });
+        document.getElementById("toCareerStartDate").addEventListener("input", function () {
+            updateTextInput("toCareerStartDate", "toCareerStartDateText");
+        });
+        document.getElementById("fromFirstAlbumDate").addEventListener("input", function () {
+            updateTextInput("fromFirstAlbumDate", "fromFirstAlbumDateText");
+        });
+        document.getElementById("toFirstAlbumDate").addEventListener("input", function () {
+            updateTextInput("toFirstAlbumDate", "toFirstAlbumDateText");
+        });
+    
+        // Function to update the slider values when the text inputs change
+        function updateSlider(sliderId, inputId) {
+            const slider = document.getElementById(sliderId);
+            const input = document.getElementById(inputId);
+            slider.value = input.value;
+        }
+    
+        // Add event listeners to update sliders when text inputs change
+        document.getElementById("fromCareerStartDateText").addEventListener("input", function () {
+            updateSlider("fromCareerStartDate", "fromCareerStartDateText");
+        });
+        document.getElementById("toCareerStartDateText").addEventListener("input", function () {
+            updateSlider("toCareerStartDate", "toCareerStartDateText");
+        });
+        document.getElementById("fromFirstAlbumDateText").addEventListener("input", function () {
+            updateSlider("fromFirstAlbumDate", "fromFirstAlbumDateText");
+        });
+        document.getElementById("toFirstAlbumDateText").addEventListener("input", function () {
+            updateSlider("toFirstAlbumDate", "toFirstAlbumDateText");
+        });
+    </script>
+    
+      <div class="FilterLocation">
+        <div>
+          Select Location
+        </div>
+        <select id="location" name="location">
+          <option value="">location</option>
+          {{ range .Places }}
+          <option value="{{ . }}" {{if eq . $.Location}} selected {{ end }}>{{ . }}</option>
+          {{ end }}
+        </select>
       </div>
-      <div>
-        Select Location
+      <div class="FilterNumberOfMember">
+        <div>
+          Number Of member
+        </div>
+        <div>
+          <label>1</label><input type="checkbox" id="1member" name="1member" {{if .Member1}} checked {{ end }}>
+        </div>
+        <div>
+          <label>2</label><input type="checkbox" id="2member" name="2member" {{if .Member2}} checked {{ end }}>
+        </div>
+        <div>
+          <label>3</label><input type="checkbox" id="3member" name="3member" {{if .Member3}} checked {{ end }}>
+        </div>
+        <div>
+          <label>4</label><input type="checkbox" id="4member" name="4member" {{if .Member4}} checked {{ end }}>
+        </div>
+        <div>
+          <label>5</label><input type="checkbox" id="5member" name="5member" {{if .Member5}} checked {{ end }}>
+        </div>
+        <div>
+          <label>6</label><input type="checkbox" id="6member" name="6member" {{if .Member6}} checked {{ end }}>
+        </div>
+        <div>
+          <label>7</label><input type="checkbox" id="6member" name="6member" {{if .Member7}} checked {{ end }}>
+        </div>
+        <div>
+          <label>8</label><input type="checkbox" id="8member" name="8member" {{if .Member8}} checked {{ end }}>
+        </div>
       </div>
-      <select id="location" name="location">
-        <option value="">location</option>
-        {{ range .Places }}
-        <option value="{{ . }}" {{if eq . $.Location}} selected {{ end }}>{{ . }}</option>
-        {{ end }}
-      </select>
-      <div>
-        Number Of member
-      </div>
-      <div>
-        <label>1</label><input type="checkbox" id="1member" name="1member" {{if .Member1}} checked {{ end }}>
-      </div>
-      <div>
-        <label>2</label><input type="checkbox" id="2member" name="2member" {{if .Member2}} checked {{ end }}>
-      </div>
-      <div>
-        <label>3</label><input type="checkbox" id="3member" name="3member" {{if .Member3}} checked {{ end }}>
-      </div>
-      <div>
-        <label>4</label><input type="checkbox" id="4member" name="4member" {{if .Member4}} checked {{ end }}>
-      </div>
-      <div>
-        <label>5</label><input type="checkbox" id="5member" name="5member" {{if .Member5}} checked {{ end }}>
-      </div>
-      <div>
-        <label>6</label><input type="checkbox" id="6member" name="6member" {{if .Member6}} checked {{ end }}>
-      </div>
-      <div>
-        <label>7</label><input type="checkbox" id="6member" name="6member" {{if .Member7}} checked {{ end }}>
-      </div>
-      <div>
-        <label>8</label><input type="checkbox" id="8member" name="8member" {{if .Member8}} checked {{ end }}>
-      </div>
-      <div>
+      <div class="SearchButton">
         <button>search</button>
       </div>
       <div id="searchResults">
