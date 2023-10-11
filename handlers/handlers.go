@@ -69,11 +69,20 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		arr = append(arr, reflect.ValueOf(v.DatesLocations).MapKeys())
 	}
 
-	for _, v := range arr {
+	var filteredBand []Artist
+	for i, v := range band {
+		searchLocation := false
+		filterLocation := false
 		var array []string
-		for _, vv := range v {
+		for _, vv := range arr[i] {
 			vv2 := strings.ReplaceAll(vv.String(), "_", " ")
 			vv2 = strings.ReplaceAll(vv2, "-", ", ")
+			if strings.Contains(strings.ToLower(vv2), strings.ToLower(searchInput)) {
+				searchLocation = true
+			}
+			if strings.ToLower(location) == vv2 || location == "" {
+				filterLocation = true
+			}
 			array = append(array, vv2)
 			vv2 = strings.Title(vv2)
 			replacer := strings.NewReplacer("Uk", "UK", "Usa", "USA")
@@ -83,30 +92,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 		}
 		arr_cities = append(arr_cities, array)
-
-	}
-
-	for _, v := range new_locations {
-		if !Contains(res_locations, v) {
-			res_locations = append(res_locations, v)
-		}
-	}
-
-	var filteredBand []Artist
-	for _, v := range band {
-		a, _ := JsonLocation(v.Locations)
-		searchLocation := false
-		filterLocation := false
-		for _, vv := range a.Locations {
-			vv2 := strings.ReplaceAll(vv, "_", " ")
-			vv2 = strings.ReplaceAll(vv2, "-", ", ")
-			if strings.Contains(strings.ToLower(vv2), strings.ToLower(searchInput)) {
-				searchLocation = true
-			}
-			if strings.ToLower(location) == vv2 || location == "" {
-				filterLocation = true
-			}
-		}
 		firstAlbum, _ := strconv.Atoi(strings.Split(v.FirstAlbum, "-")[2])
 		if filterLocation && careerStartDate <= v.CreationDate && firstAlbumDate <= firstAlbum && ((!member1 && !member2 && !member3 && !member4 && !member5 && !member6 && !member7 && !member8) || (member1 && len(v.Members) == 1) || (member2 && len(v.Members) == 2) || (member3 && len(v.Members) == 3) || (member4 && len(v.Members) == 4) || (member5 && len(v.Members) == 5) || (member6 && len(v.Members) == 6) || (member7 && len(v.Members) == 7) || (member8 && len(v.Members) == 8)) {
 			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || strings.Contains(strings.ToLower(v.FirstAlbum), searchInputLower) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
@@ -120,6 +105,12 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
+	for _, v := range new_locations {
+		if !Contains(res_locations, v) {
+			res_locations = append(res_locations, v)
+		}
+	}
+
 	res := SearchInput{
 		Group:           filteredBand,
 		People:          members,
