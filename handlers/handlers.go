@@ -72,9 +72,13 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var members []string
+	var suggestions []string
 	var created []int
+
 	for _, v := range band {
+		suggestions = append(suggestions, v.Name)
 		for _, vv := range v.Members {
+			suggestions = append(suggestions, vv)
 			if !Contains(members, v.Name) {
 				members = append(members, vv)
 			}
@@ -111,12 +115,14 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			vv2 = strings.Title(vv2)
 			replacer := strings.NewReplacer("Uk", "UK", "Usa", "USA")
 			res_vv := replacer.Replace(vv2)
-
+			suggestions = append(suggestions, res_vv)
 			new_locations = append(new_locations, res_vv)
 
 		}
 		arr_cities = append(arr_cities, array)
 		firstAlbum, _ := strconv.Atoi(strings.Split(v.FirstAlbum, "-")[2])
+		suggestions = append(suggestions, v.FirstAlbum)
+		suggestions = append(suggestions, strconv.FormatInt(int64(v.CreationDate), 10))
 		if filterLocation && fromCareerStartDate <= v.CreationDate && toCareerStartDate >= v.CreationDate && fromFirstAlbumDate <= firstAlbum && toFirstAlbumDate >= firstAlbum && ((!member1 && !member2 && !member3 && !member4 && !member5 && !member6 && !member7 && !member8) || (member1 && len(v.Members) == 1) || (member2 && len(v.Members) == 2) || (member3 && len(v.Members) == 3) || (member4 && len(v.Members) == 4) || (member5 && len(v.Members) == 5) || (member6 && len(v.Members) == 6) || (member7 && len(v.Members) == 7) || (member8 && len(v.Members) == 8)) {
 			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || strings.Contains(strings.ToLower(v.FirstAlbum), searchInputLower) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
 				filteredBand = append(filteredBand, v)
@@ -154,6 +160,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		Member7:             member7,
 		Member8:             member8,
 		Location:            location,
+		Suggestions:         suggestions,
 	}
 	err = template.Execute(w, res)
 	if err != nil {

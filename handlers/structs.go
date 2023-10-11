@@ -59,6 +59,7 @@ type SearchInput struct {
 	Member7             bool
 	Member8             bool
 	Location            string
+	Suggestions         []string
 }
 
 func Contains(s []string, str string) bool {
