@@ -8,7 +8,7 @@
 
 <body>
   <style>
-    body{
+    body {
       background-color: #331D2C;
       color: whitesmoke;
     }
@@ -17,34 +17,45 @@
     <div class="container">
       <div class="head">
         <div class="logo"><a href="/"></a><img class="img" src="/static/png/pngwing.com.png" alt=""></div>
-        <div class="tit"><h1>Groupie Tracker</h1></div>
+        <div class="tit">
+          <h1>Groupie Tracker</h1>
+        </div>
       </div>
       <!-- <input type="text" c"> -->
       <div class="search-box">
         <button class="btn-search"><i class="fas fa-search"></i></button>
-        <input type="text" class="input-search" id="searchInput" name="searchInput" placeholder="Search artists..." value="{{ .SearchInput }}">
+        <input type="text" class="input-search" id="searchInput" name="searchInput" placeholder="Search artists..."
+          value="{{ .SearchInput }}">
       </div>
       <div>
         Career Start Date
       </div>
       <div>
 
-        <label>1900</label><input type="range" id="careerStartDate" name="careerStartDate" min="1900" max="2030"
-          value="{{ .CareerStartDate }}"><label>2030</label>
+        <label>1900</label>
+        <input type="range" id="fromCareerStartDate" name="fromCareerStartDate" min="1900" max="2030"
+          value="{{ .FromCareerStartDate }}">
+          <input type="range" id="toCareerStartDate" name="toCareerStartDate" min="1900" max="2030"
+          value="{{ .ToCareerStartDate }}">
+        <label>2030</label>
       </div>
       <div>
         First Album Date
       </div>
       <div>
-        <label>1900</label><input type="range" id="firstAlbumDate" name="firstAlbumDate" min="1900" max="2030"
-          value="{{ .FirstAlbumDate }}"><label>2030</label>
+        <label>1900</label>
+        <input type="range" id="fromFirstAlbumDate" name="fromFirstAlbumDate" min="1900" max="2030"
+          value="{{ .FromFirstAlbumDate }}">
+          <input type="range" id="toFirstAlbumDate" name="toFirstAlbumDate" min="1900" max="2030"
+          value="{{ .ToFirstAlbumDate }}">
+          <label>2030</label>
       </div>
       <div>
         Select Location
       </div>
       <select id="location" name="location">
         <option value="">location</option>
-       {{ range .Places }}
+        {{ range .Places }}
         <option value="{{ . }}" {{if eq . $.Location}} selected {{ end }}>{{ . }}</option>
         {{ end }}
       </select>
@@ -88,7 +99,7 @@
         </div>
         {{ end }}
       </div>
-      
+
     </div>
   </form>
 </body>

@@ -14,8 +14,22 @@ var arr_cities [][]string
 func Index(w http.ResponseWriter, r *http.Request) {
 	searchInput := strings.TrimSpace(r.FormValue("searchInput"))
 	searchInputLower := strings.ToLower(searchInput)
-	careerStartDate, _ := strconv.Atoi(r.FormValue("careerStartDate"))
-	firstAlbumDate, _ := strconv.Atoi(r.FormValue("firstAlbumDate"))
+	fromCareerStartDate, e1 := strconv.Atoi(r.FormValue("fromCareerStartDate"))
+	if e1 != nil {
+		fromCareerStartDate = 1900
+	}
+	toCareerStartDate, e2 := strconv.Atoi(r.FormValue("toCareerStartDate"))
+	if e2 != nil {
+		toCareerStartDate = 2030
+	}
+	fromFirstAlbumDate, e3 := strconv.Atoi(r.FormValue("fromFirstAlbumDate"))
+	if e3 != nil {
+		fromFirstAlbumDate = 1900
+	}
+	toFirstAlbumDate, e2 := strconv.Atoi(r.FormValue("toFirstAlbumDate"))
+	if e2 != nil {
+		toFirstAlbumDate = 2030
+	}
 	member1 := strings.TrimSpace(r.FormValue("1member")) == "on"
 	member2 := strings.TrimSpace(r.FormValue("2member")) == "on"
 	member3 := strings.TrimSpace(r.FormValue("3member")) == "on"
@@ -93,7 +107,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		}
 		arr_cities = append(arr_cities, array)
 		firstAlbum, _ := strconv.Atoi(strings.Split(v.FirstAlbum, "-")[2])
-		if filterLocation && careerStartDate <= v.CreationDate && firstAlbumDate <= firstAlbum && ((!member1 && !member2 && !member3 && !member4 && !member5 && !member6 && !member7 && !member8) || (member1 && len(v.Members) == 1) || (member2 && len(v.Members) == 2) || (member3 && len(v.Members) == 3) || (member4 && len(v.Members) == 4) || (member5 && len(v.Members) == 5) || (member6 && len(v.Members) == 6) || (member7 && len(v.Members) == 7) || (member8 && len(v.Members) == 8)) {
+		if filterLocation && fromCareerStartDate <= v.CreationDate && toCareerStartDate >= v.CreationDate && fromFirstAlbumDate <= firstAlbum && toFirstAlbumDate >= firstAlbum && ((!member1 && !member2 && !member3 && !member4 && !member5 && !member6 && !member7 && !member8) || (member1 && len(v.Members) == 1) || (member2 && len(v.Members) == 2) || (member3 && len(v.Members) == 3) || (member4 && len(v.Members) == 4) || (member5 && len(v.Members) == 5) || (member6 && len(v.Members) == 6) || (member7 && len(v.Members) == 7) || (member8 && len(v.Members) == 8)) {
 			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || strings.Contains(strings.ToLower(v.FirstAlbum), searchInputLower) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
 				filteredBand = append(filteredBand, v)
 			} else {
@@ -112,22 +126,24 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res := SearchInput{
-		Group:           filteredBand,
-		People:          members,
-		Created:         created,
-		Places:          res_locations,
-		SearchInput:     searchInput,
-		CareerStartDate: careerStartDate,
-		FirstAlbumDate:  firstAlbumDate,
-		Member1:         member1,
-		Member2:         member2,
-		Member3:         member3,
-		Member4:         member4,
-		Member5:         member5,
-		Member6:         member6,
-		Member7:         member7,
-		Member8:         member8,
-		Location:        location,
+		Group:               filteredBand,
+		People:              members,
+		Created:             created,
+		Places:              res_locations,
+		SearchInput:         searchInput,
+		FromCareerStartDate: fromCareerStartDate,
+		ToCareerStartDate:   toCareerStartDate,
+		FromFirstAlbumDate:  fromFirstAlbumDate,
+		ToFirstAlbumDate:    toFirstAlbumDate,
+		Member1:             member1,
+		Member2:             member2,
+		Member3:             member3,
+		Member4:             member4,
+		Member5:             member5,
+		Member6:             member6,
+		Member7:             member7,
+		Member8:             member8,
+		Location:            location,
 	}
 	err = template.Execute(w, res)
 	if err != nil {
