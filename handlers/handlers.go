@@ -22,6 +22,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	if e2 != nil {
 		toCareerStartDate = 2030
 	}
+	if fromCareerStartDate > toCareerStartDate {
+		newVar := fromCareerStartDate
+		fromCareerStartDate = toCareerStartDate
+		toCareerStartDate = newVar
+	}
 	fromFirstAlbumDate, e3 := strconv.Atoi(r.FormValue("fromFirstAlbumDate"))
 	if e3 != nil {
 		fromFirstAlbumDate = 1900
@@ -29,6 +34,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	toFirstAlbumDate, e2 := strconv.Atoi(r.FormValue("toFirstAlbumDate"))
 	if e2 != nil {
 		toFirstAlbumDate = 2030
+	}
+	if fromFirstAlbumDate > toFirstAlbumDate {
+		newVar := fromFirstAlbumDate
+		fromFirstAlbumDate = toFirstAlbumDate
+		toFirstAlbumDate = newVar
 	}
 	member1 := strings.TrimSpace(r.FormValue("1member")) == "on"
 	member2 := strings.TrimSpace(r.FormValue("2member")) == "on"
