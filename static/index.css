@@ -2,6 +2,7 @@
 .container {
     text-align: center;
     margin-top: 20px;
+    
   }
   
   /* #searchInput {
@@ -143,8 +144,10 @@
 .FilterNumberOfMember,
 .SearchButton {
     display: inline-block;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     vertical-align: top;
+    flex-grow: 1;
+    flex-basis: 200;
 }
 
 /* Style the header in each filter container */
@@ -196,6 +199,13 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+.Filter{ 
+  /* border: 5px solid; */
+  margin: auto;
+  width: 50%;
+  padding: 10px;
 }
 
 
