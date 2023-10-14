@@ -23,12 +23,16 @@
       </div>
       <!-- <input type="text" c"> -->
       <div class="Filter">
-        <div class="search-box">
+        <!-- <div class="search-box">
           <button class="btn-search"><i class="fas fa-search"></i></button>
           <input type="text" class="input-search" id="searchInput" name="searchInput" placeholder="Search artists..."
             value="{{ .SearchInput }}">
         </div>
-  
+   -->
+      <div class="searchBox">
+        <input type="text" class="input-search" id="searchInput" name="searchInput" placeholder="Search artist....." value="{{ .SearchInput }}">
+
+      </div>
         <div class="FilterCareerStartDate">
           <div>
             Career Start Date
@@ -155,8 +159,12 @@
         {{ range .Group }}
         <div class="artist">
           <a href="/artist/{{ .Id }}">
-            <img src="{{ .Image }}" width="150px"><br>
-            <span class="artist-name">{{ .Name }}</span>
+            <!-- <img class="artist-imge" src="{{ .Image }}"><br>
+            <span class="artist-name">{{ .Name }}</span> -->
+            <div class="artist-image-container">
+              <img class="artist-image" src="{{ .Image }}" alt="{{ .Name }}">
+              <span class="artist-name">{{ .Name }}</span>
+          </div>
           </a>
         </div>
         {{ end }}
