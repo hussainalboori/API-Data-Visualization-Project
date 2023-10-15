@@ -6,14 +6,17 @@ body, h1, p, ul, li, table {
 
 /* Set a background color for the body */
 body {
-  background-color: #f0f0f0;
-  font-family: Arial, sans-serif;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
+  background-color: #f8f7ff;
+  font-family: monospace
 }
-
 /* Style the container */
 .container {
   max-width: 400px;
-  margin: 0 auto;
+  margin: -0 auto;
   /*padding: 20px;*/
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -25,6 +28,7 @@ body {
   border-style: solid;
   border-radius: 6px;
 }
+
 
 /* Style the header */
 h1 {
@@ -42,7 +46,11 @@ h1 {
   border-color: black;
   border-width: 4px;
   border-style: double;
-  border-radius: 300px;
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 180px;
+  margin-left: 180px;
 }
 
 /* Style the member list */
@@ -57,7 +65,7 @@ h1 {
 
 /* Style the logo image */
 .logo img {
-  max-width: 40%;
+  max-width: 35%;
   height: auto;
   border-radius:10px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;

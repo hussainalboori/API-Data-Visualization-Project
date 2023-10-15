@@ -6,17 +6,12 @@
 </head>
 
 <body>
-  <style>
-    body {
-      background-color: #f8f7ff;
-      font-family: monospace
-    }
-  </style>
+ 
   <a class="home" href="/"></a>
   <div class="container">
     <div class="main">
+      <h1>{{.Main.Name}}</h1>
       <div class="bio">
-        <h1>{{.Main.Name}}</h1>
         <p>Created: </p><a>{{.Main.CreationDate}}</a>
         <p>First album released:</p> <a>{{.Main.FirstAlbum}}</a>
         <ul class="members">
