@@ -16,11 +16,11 @@ ul {
 }
 
 
-h2,
+/* h2,
 h3,
 a {
 	color: #34495e;
-}
+} */
 
 a {
 	text-decoration: none;
@@ -31,6 +31,7 @@ a {
 .logo {
 	margin: 0;
 	font-size: 1.45em;
+  color: #F1FAEE;
 }
 
 .main-nav {
@@ -56,7 +57,7 @@ a {
 
 
 
-.header {
+/* .header {
 	padding-top: .5em;
 	padding-bottom: .5em;
 	border: 1px solid #a2a2a2;
@@ -67,7 +68,7 @@ a {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
-}
+} */
 
 
 /* ================================= 
@@ -105,7 +106,6 @@ a {
 
 .container {
     text-align: center;
-    margin-top: 20px;
     
   }
   
@@ -269,9 +269,9 @@ body {
 .FilterFirstAlbumDate > div,
 .FilterLocation > div,
 .FilterNumberOfMember > div {
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #457B9D;
+  font-weight: ;
+  margin-bottom: px;
+  color: #f1faff;
 }
 
 /* Style the range input and its labels */
@@ -373,3 +373,43 @@ button:hover {
   outline: none; /* Removes the default input focus border */
   width : 500px;
 }
+
+  /* Sidebar Styles */
+  .sidebar {
+    width: 340px; /* Adjust the width as needed */
+    background-color: #333; /* Background color of the sidebar */
+    color: #fff; /* Text color in the sidebar */
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%; /* Adjust to fill the full height of the page */
+  }
+
+  .sidebar-nav {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar-nav li {
+    padding: 10px;
+  }
+
+  .sidebar-nav li a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  /* Main Content Styles */
+  .main-content {
+    margin-left: 250px; /* Set to the width of the sidebar */
+    padding: 20px; /* Add space around the main content */
+  }
+
+  /* Add more styles as needed for your main content */
+
+  /* Example: Style the header with a background color */
+  .header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
