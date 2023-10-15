@@ -1,61 +1,21 @@
 /* index.css */
 
-* {
-	box-sizing: border-box;
-}
 body {
 	font-family: 'Montserrat', sans-serif;
 	line-height: 1.6;
 	margin: 0;
 	min-height: 100vh;
 }
+
+.groupie {
+  padding: 20px ;
+}
+
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-
-
-/* h2,
-h3,
-a {
-	color: #34495e;
-} */
-
-a {
-	text-decoration: none;
-}
-
-
-
-.logo {
-	margin: 0;
-	font-size: 1.45em;
-  color: #F1FAEE;
-}
-
-.main-nav {
-	margin-top: 5px;
-
-}
-.logo a,
-.main-nav a {
-	padding: 10px 15px;
-	text-transform: uppercase;
-	text-align: center;
-	display: block;
-}
-
-.main-nav a {
-	color: #34495e;
-	font-size: .99em;
-}
-
-.main-nav a:hover {
-	color: #718daa;
-}
-
-
 
 /* .header {
 	padding-top: .5em;
@@ -264,6 +224,7 @@ body {
   color: whitesmoke;
 }
 
+
 /* Style the header in each filter container */
 .FilterCareerStartDate > div,
 .FilterFirstAlbumDate > div,
@@ -305,10 +266,12 @@ select {
 
 /* Style the search button */
 button {
-  background-color: #331D2C;
+  background-color: #333;
+	font-weight: bold ;
+	font-size: 20 ;
   border-color: #000;
   border-style: solid;
-  border-width: 1px;
+  border-width: 3px;
   color: white;
   padding: 10px 20px;
   cursor: pointer;
@@ -318,7 +281,9 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #ffffff;
+	color: black ;
+	transition: 0.5s ; 
 }
 
 .Filter{ 
@@ -362,6 +327,8 @@ button:hover {
 
 .input-search {
   padding: 10px;
+	background-color: #333 ;
+	color: white;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
@@ -410,6 +377,6 @@ button:hover {
   /* Example: Style the header with a background color */
   .header {
     background-color: #333;
-    color: #fff;
+    color: #333;
     padding: 10px;
   }
