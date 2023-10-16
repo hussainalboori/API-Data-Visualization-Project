@@ -98,12 +98,15 @@ th {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 40px;
   height: 40px;
-  background-image: url('path-to-your-home-icon.png');
   background-size: cover;
 }
 
+a.home{
+  text-decoration: none;
+  font-size:xxx-large;
+  color:black;
+}
 /* Style the Concerts section */
 .Concerts {
   margin-top: 20px;

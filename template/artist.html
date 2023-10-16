@@ -7,10 +7,15 @@
 
 <body>
  
-  <a class="home" href="/"></a>
+  <a class="home" href="/">Groupie Tracker</a>
   <div class="container">
     <div class="main">
       <h1>{{.Main.Name}}</h1>
+      <div class="logo">
+        <div class="image">
+          <img src="{{.Main.Image}}" alt="artist's image" width="80%">
+        </div>
+      </div>
       <div class="bio">
         <p>Created: </p><a>{{.Main.CreationDate}}</a>
         <p>First album released:</p> <a>{{.Main.FirstAlbum}}</a>
@@ -20,11 +25,6 @@
           <li class="member">{{.}}</li>
           {{end}}
         </ul>
-      </div>
-      <div class="logo">
-        <div class="image">
-          <img src="{{.Main.Image}}" alt="artist's image" width="80%">
-        </div>
       </div>
     </div>
     <div class="Concerts">
@@ -49,7 +49,7 @@
             </tr>
             <tr>
               <td>
-                <div id="googleMap{{$key}}" style="width:100%;height:400px;"></div>
+                <!-- <div id="googleMap{{$key}}" style="width:100%;height:400px;"></div> -->
               </td>
             </tr>
           </tbody>
@@ -72,15 +72,15 @@
       if (status === 'OK') {
         var myLatLng = results[0].geometry.location;
 
-        var map = new google.maps.Map(document.getElementById("googleMap{{$key}}"), {
-          center: myLatLng,
-          zoom: 8,
-        });
+        // var map = new google.maps.Map(document.getElementById("googleMap{{$key}}"), {
+        //   center: myLatLng,
+        //   zoom: 8,
+        // });
 
         var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          title: '{{$key}}',
+          title: "'{{$key}}'",
         });
         var marker2 = new google.maps.Marker({
           position: myLatLng,
