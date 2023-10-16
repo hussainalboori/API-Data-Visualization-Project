@@ -3,6 +3,7 @@
 
 <head>
   <link rel="stylesheet" type="text/css" href="/static/artist.css">
+  <title>artist's page</title>
 </head>
 
 <body>
@@ -17,10 +18,10 @@
         </div>
       </div>
       <div class="bio">
-        <p>Created: </p><a>{{.Main.CreationDate}}</a>
-        <p>First album released:</p> <a>{{.Main.FirstAlbum}}</a>
+        <p class="bio-content">Created: </p><a>{{.Main.CreationDate}}</a>
+        <p class="bio-content">First album released:</p> <a>{{.Main.FirstAlbum}}</a>
         <ul class="members">
-          <p>Members:</p>
+          <p class="bio-content">Members:</p>
           {{range .Main.Members}}
           <li class="member">{{.}}</li>
           {{end}}
