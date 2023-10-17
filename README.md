@@ -54,7 +54,7 @@ To get started with the Groupie Trackers project, follow these steps:
 4. Access the web application by opening a web browser and navigating to:
 
    ```
-   http://localhost:8080
+   http://localhost:8040
    ```
 
 ## Project Structure
