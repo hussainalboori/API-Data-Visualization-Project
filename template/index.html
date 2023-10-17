@@ -183,12 +183,15 @@
         a.setAttribute("class", "autocomplete-items");
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
+        var counter = 0;
         /*for each item in the array...*/
         for (i = 0; i < arr.length; i++) {
           /*check if the item starts with the same letters as the text field value:*/
           if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            counter++;
             /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
+            b.setAttribute("class", "autocomplete-item");
             /*make the matching letters bold:*/
             b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
@@ -203,6 +206,9 @@
               closeAllLists();
             });
             a.appendChild(b);
+            if (counter == 5) {
+              i = arr.length;
+            }
           }
         }
       });
@@ -262,5 +268,13 @@
         closeAllLists(e.target);
       });
     }
+
+    // Function to handle keydown event in the search input
+  document.getElementById('searchInput').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      // Trigger the form submission
+      document.querySelector('.from-filter').submit();
+    }
+  });
   </script>
 </body>
