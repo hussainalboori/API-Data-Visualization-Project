@@ -71,24 +71,16 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var members []string
 	var suggestions []string
-	var created []int
 
 	for _, v := range band {
 		if !Contains(suggestions, v.Name) {
 			suggestions = append(suggestions, v.Name)
 		}
 		for _, vv := range v.Members {
-			if !Contains(members, v.Name) {
-				members = append(members, vv)
-				if !Contains(suggestions, vv) {
-					suggestions = append(suggestions, vv)
-				}
+			if !Contains(suggestions, vv) {
+				suggestions = append(suggestions, vv)
 			}
-		}
-		if !ContainsInt(created, v.CreationDate) {
-			created = append(created, v.CreationDate)
 		}
 	}
 	locations, err2 := JsonLocations()
@@ -161,8 +153,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 	res := SearchInput{
 		Group:               filteredBand,
-		People:              members,
-		Created:             created,
 		Places:              res_locations,
 		SearchInput:         searchInput,
 		FromCareerStartDate: fromCareerStartDate,
