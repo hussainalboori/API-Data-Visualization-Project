@@ -18,14 +18,21 @@
         </div>
       </div>
       <div class="bio">
-        <p class="bio-content">Created: </p><a>{{.Main.CreationDate}}</a>
-        <p class="bio-content">First album released:</p> <a>{{.Main.FirstAlbum}}</a>
-        <ul class="members">
+        <p class="bio-content">Created: <a>{{.Main.CreationDate}}</a></p>
+        <p class="bio-content">First album released: <a>{{.Main.FirstAlbum}}</a></p> 
+        <!-- <ul class="members">
           <p class="bio-content">Members:</p>
           {{range .Main.Members}}
           <li class="member">{{.}}</li>
           {{end}}
-        </ul>
+        </ul> -->
+        <ul class="members">
+          <p class="bio-content">Members:
+            {{range $index, $member := .Main.Members}}
+              {{if $index}}, {{end}}<a>{{.}}</a>
+            {{end}}
+          </p>
+        </ul>        
       </div>
     </div>
     <div class="Concerts">
@@ -48,11 +55,7 @@
               </td>
 
             </tr>
-            <tr>
-              <td>
-                <!-- <div id="googleMap{{$key}}" style="width:100%;height:400px;"></div> -->
-              </td>
-            </tr>
+      
           </tbody>
           {{end}}
         </table>
