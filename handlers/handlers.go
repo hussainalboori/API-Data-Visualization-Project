@@ -88,16 +88,17 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		searchLocation := false
 		filterLocation := false
 		isContain := false
+		searchInputLowerArray := strings.Split(searchInputLower, "-")
 		var array []string
 		if !Contains(suggestions, v.Name) {
 			suggestions = append(suggestions, v.Name)
 		}
 		for _, vv := range v.Members {
 			suggestion := vv + " - " + v.Name
-			if !Contains(suggestions, suggestion) {
+			if !Contains(suggestions, suggestion) && v.Name != vv {
 				suggestions = append(suggestions, suggestion)
 			}
-			if strings.Contains(strings.ToLower(vv), searchInputLower) {
+			if strings.Contains(strings.ToLower(vv), searchInputLower) || ContainsSuggestions(searchInputLowerArray, strings.ToLower(vv)) {
 				isContain = true
 			}
 		}
@@ -133,7 +134,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			suggestions = append(suggestions, strconv.FormatInt(int64(v.CreationDate), 10))
 		}
 		if filterLocation && fromCareerStartDate <= v.CreationDate && toCareerStartDate >= v.CreationDate && fromFirstAlbumDate <= firstAlbum && toFirstAlbumDate >= firstAlbum && ((!member1 && !member2 && !member3 && !member4 && !member5 && !member6 && !member7 && !member8) || (member1 && len(v.Members) == 1) || (member2 && len(v.Members) == 2) || (member3 && len(v.Members) == 3) || (member4 && len(v.Members) == 4) || (member5 && len(v.Members) == 5) || (member6 && len(v.Members) == 6) || (member7 && len(v.Members) == 7) || (member8 && len(v.Members) == 8)) {
-			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || strings.Contains(strings.ToLower(v.FirstAlbum), searchInputLower) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
+			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || ContainsSuggestions(searchInputLowerArray, strings.ToLower(v.Name)) || strings.Contains(strings.ToLower(v.FirstAlbum), searchInputLower) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
 				filteredBand = append(filteredBand, v)
 			} else {
 				if isContain {
@@ -147,7 +148,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			res_locations = append(res_locations, v)
 		}
 	}
-
 	res := SearchInput{
 		Group:               filteredBand,
 		Places:              res_locations,

@@ -1,5 +1,7 @@
 package handlers
 
+import "strings"
+
 type Errors struct {
 	Status  int
 	Message string
@@ -57,6 +59,16 @@ type SearchInput struct {
 func Contains(s []string, str string) bool {
 	for _, v := range s {
 		if v == str {
+			return true
+		}
+	}
+
+	return false
+}
+
+func ContainsSuggestions(s []string, str string) bool {
+	for _, v := range s {
+		if strings.Contains(str, strings.TrimSpace(v)) {
 			return true
 		}
 	}
