@@ -73,17 +73,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 	var suggestions []string
 
-	for _, v := range band {
-		if !Contains(suggestions, v.Name) {
-			suggestions = append(suggestions, v.Name)
-		}
-		for _, vv := range v.Members {
-			suggestion := vv + " - " + v.Name
-			if !Contains(suggestions, suggestion) {
-				suggestions = append(suggestions, suggestion)
-			}
-		}
-	}
 	locations, err2 := JsonLocations()
 	if err2 != nil {
 		Errorshandler(w, http.StatusInternalServerError)
@@ -98,7 +87,20 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	for i, v := range band {
 		searchLocation := false
 		filterLocation := false
+		isContain := false
 		var array []string
+		if !Contains(suggestions, v.Name) {
+			suggestions = append(suggestions, v.Name)
+		}
+		for _, vv := range v.Members {
+			suggestion := vv + " - " + v.Name
+			if !Contains(suggestions, suggestion) {
+				suggestions = append(suggestions, suggestion)
+			}
+			if strings.Contains(strings.ToLower(vv), searchInputLower) {
+				isContain = true
+			}
+		}
 		for _, vv := range arr[i] {
 			vv2 := strings.ReplaceAll(vv.String(), "_", " ")
 			vv2 = strings.ReplaceAll(vv2, "-", ", ")
@@ -134,12 +136,6 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || strings.Contains(strings.ToLower(v.FirstAlbum), searchInputLower) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
 				filteredBand = append(filteredBand, v)
 			} else {
-				isContain := false
-				for _, member := range v.Members {
-					if strings.Contains(strings.ToLower(member), searchInputLower) {
-						isContain = true
-					}
-				}
 				if isContain {
 					filteredBand = append(filteredBand, v)
 				}
