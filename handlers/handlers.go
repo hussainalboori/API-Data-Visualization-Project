@@ -78,8 +78,9 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			suggestions = append(suggestions, v.Name)
 		}
 		for _, vv := range v.Members {
-			if !Contains(suggestions, vv) {
-				suggestions = append(suggestions, vv)
+			suggestion := vv + " - " + v.Name
+			if !Contains(suggestions, suggestion) {
+				suggestions = append(suggestions, suggestion)
 			}
 		}
 	}
