@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	port := ":8080"
+	port := ":8040"
 	http.HandleFunc("/", handlers.Index)
 	http.HandleFunc("/artist/", handlers.Artists)
 	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("./static"))))
