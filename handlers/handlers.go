@@ -134,7 +134,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			suggestions = append(suggestions, strconv.FormatInt(int64(v.CreationDate), 10))
 		}
 		if filterLocation && fromCareerStartDate <= v.CreationDate && toCareerStartDate >= v.CreationDate && fromFirstAlbumDate <= firstAlbum && toFirstAlbumDate >= firstAlbum && ((!member1 && !member2 && !member3 && !member4 && !member5 && !member6 && !member7 && !member8) || (member1 && len(v.Members) == 1) || (member2 && len(v.Members) == 2) || (member3 && len(v.Members) == 3) || (member4 && len(v.Members) == 4) || (member5 && len(v.Members) == 5) || (member6 && len(v.Members) == 6) || (member7 && len(v.Members) == 7) || (member8 && len(v.Members) == 8)) {
-			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || strings.Contains(strings.ToLower(v.FirstAlbum), searchInputLower) || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
+			if searchLocation || strings.Contains(strings.ToLower(v.Name), searchInputLower) || v.FirstAlbum == searchInputLower || strings.Contains(strconv.FormatInt(int64(v.CreationDate), 10), searchInputLower) {
 				filteredBand = append(filteredBand, v)
 			} else {
 				if isContain {
