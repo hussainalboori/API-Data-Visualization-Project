@@ -36,7 +36,7 @@ To get started with the Groupie Trackers project, follow these steps:
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/yourusername/groupie-trackers.git
+   git clone https://github.com/hussainalboori/groupie-trackers.git
    ```
 
 2. Install the required Go packages:
