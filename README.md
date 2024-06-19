@@ -84,7 +84,7 @@ The project includes event-driven actions, such as client-server communication, 
 
 - [Hussain Alboori](https://github.com/hussainalboori)
 - [Hussain Nabeel](https://github.com/7ussainnabeel)
-- Ali Alsendi
+- [Ali Alsendi](https://github.com/aes1998)
 
 ## Contributing
 
